@@ -7,7 +7,10 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 from leagueManager import LeagueManager
 from sklearn.preprocessing import MinMaxScaler
-from pages import STAT_ORDER as stats
+
+
+stats = ['R', 'HR', 'RBI', 'OBP', 'SB', 'K', 'W', 'SV', 'ERA', 'WHIP']
+ASCENDING_STATS = {'ERA', 'WHIP'}  # these should be sorted descending (lower is better)
 
 # Title
 st.title("📈 Accumulated Team Stats")
@@ -27,8 +30,6 @@ format_dict = {col: "{:.3f}" if col in float_cols else "{:.0f}" for col in df.co
 
 # Display styled DataFrame
 st.dataframe(df.style.format(format_dict), use_container_width=True)
-
-ASCENDING_STATS = {'ERA', 'WHIP'}
 
 # --- Load Saved Stats ---
 with open("team_stats.json") as f:

@@ -4,7 +4,8 @@ import streamlit as st
 import json
 import pandas as pd
 import plotly.express as px
-from pages import STAT_ORDER as stats
+
+
 
 # Load saved stats
 with open("team_stats.json") as f:
@@ -15,7 +16,9 @@ df_stats = pd.DataFrame.from_dict(team_stats, orient='index')
 df_stats.index.name = "Team"
 
 # Normalize stats
+stats = ['R', 'HR', 'RBI', 'OBP', 'SB', 'K', 'W', 'SV', 'ERA', 'WHIP']
 INVERT_STATS = {'ERA', 'WHIP', 'OBP'}
+
 df_normalized = (df_stats - df_stats.min()) / (df_stats.max() - df_stats.min())
 
 # Invert where lower is better
